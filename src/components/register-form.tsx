@@ -16,14 +16,14 @@ type FormInput = {
 const schema = yup.object({
   name: yup.string().required(),
   lastname: yup.string().required(),
-  email: yup.string().email().required(),
+  email: yup.string().email().lowercase().required(),
   password: yup.string().required(),
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ onClose }: { onClose: any }) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const {
@@ -37,11 +37,17 @@ const RegisterForm = () => {
   const onSubmit = async (data: FormInput) => {
     try {
       setLoading(true);
-      const response = await registerService(data);
-      console.log(response);
+      await registerService(data);
+      toast.success('User has been registered successfully!');
+      onClose();
     } catch (error: any) {
-      console.log(error);
-      toast.error(error);
+      if (error?.status >= 400 || error?.status < 500) {
+        toast.warning(error.data);
+        return;
+      }
+      toast.error(
+        error?.data || 'Server Error! Was an error while creating user'
+      );
     } finally {
       setLoading(false);
     }

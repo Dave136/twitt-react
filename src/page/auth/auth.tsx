@@ -9,6 +9,7 @@ import LogoWhite from '../../assets/logo-white.png';
 import BasicModal from '../../components/basic-modal';
 import LoginForm from '../../components/login-form';
 import RegisterForm from '../../components/register-form';
+import { useRef } from 'react';
 
 const LeftComponent = () => (
   <div className="text-center lg:text-left max-w-2xl mr-16">
@@ -49,6 +50,9 @@ const RightComponent = () => (
 );
 
 export default function Auth() {
+  const registerCloseRef = useRef<HTMLAnchorElement | null>(null);
+  const loginCloseRef = useRef<HTMLAnchorElement | null>(null);
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200 relative">
@@ -57,22 +61,22 @@ export default function Auth() {
           <RightComponent />
         </div>
       </div>
-      <BasicModal id="register">
+      <BasicModal id="register" closeRef={registerCloseRef}>
         <header className="flex items-center justify-center">
           <img className="w-12" src={LogoWhite} alt="Twitt logo white" />
         </header>
         <section className="flex flex-col items-center justify-center">
           <h3 className="font-bold text-3xl my-4">Register</h3>
-          <RegisterForm />
+          <RegisterForm onClose={() => registerCloseRef?.current?.click()} />
         </section>
       </BasicModal>
-      <BasicModal id="login">
+      <BasicModal id="login" closeRef={loginCloseRef}>
         <header className="flex items-center justify-center">
           <img className="w-12" src={LogoWhite} alt="Twitt logo white" />
         </header>
         <section className="flex flex-col items-center justify-center">
           <h3 className="font-bold text-2xl">Login to Twitt</h3>
-          <LoginForm />
+          <LoginForm onClose={() => loginCloseRef?.current?.click()} />
         </section>
       </BasicModal>
     </>
