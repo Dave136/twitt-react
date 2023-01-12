@@ -1,7 +1,15 @@
+import { useState } from 'react';
+import Toast from './components/toast';
+import Auth from './page/auth/auth';
+
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <div className="container">
-      <h2 className="text-2xl underline font-bold">Twitt</h2>
+    <div>
+      <h2 className="text-2xl underline font-bold"></h2>
+      {user ? 'You are logged' : <Auth />}
+      <Toast />
     </div>
   );
 }
