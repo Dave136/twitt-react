@@ -11,7 +11,6 @@ type Context = {
   setUser: (user: User) => void;
   loadUser: boolean;
   setRefreshLogin: (status: boolean) => void;
-  // isAuthenticated: () => User | null;
 };
 
 const initialState = () => ({
@@ -42,7 +41,6 @@ const AuthContext = createContext<Context>({
   setUser: () => '',
   loadUser: true,
   setRefreshLogin: () => false,
-  // isAuthenticated: () => initialState(),
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -65,12 +63,11 @@ const AuthProvider = ({ children }: Props) => {
       return null;
     }
 
-    // return jwtDecode<User>(token);
-    setUser(jwtDecode<User>(token));
+    return jwtDecode<User>(token);
   };
 
   useEffect(() => {
-    isAuthenticated();
+    setUser(isAuthenticated() ?? initialState());
     setRefreshLogin(false);
     setLoadUser(true);
   }, [refreshLogin]);
@@ -81,7 +78,6 @@ const AuthProvider = ({ children }: Props) => {
       setUser,
       loadUser,
       setRefreshLogin,
-      // isAuthenticated,
     }),
     [user]
   );

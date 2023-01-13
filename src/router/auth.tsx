@@ -1,15 +1,15 @@
+import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSearch,
   faUsers,
   faComment,
 } from '@fortawesome/free-solid-svg-icons';
-import Logo from '../../assets/logo.png';
-import LogoWhite from '../../assets/logo-white.png';
-import BasicModal from '../../components/basic-modal';
-import LoginForm from '../../components/login-form';
-import RegisterForm from '../../components/register-form';
-import { useRef } from 'react';
+import Logo from '~/assets/logo.png';
+import LogoWhite from '~/assets/logo-white.png';
+import BasicModal from '~/components/basic-modal';
+import LoginForm from '~/components/login-form';
+import RegisterForm from '~/components/register-form';
 
 const LeftComponent = () => (
   <div className="text-center lg:text-left max-w-2xl mr-16">

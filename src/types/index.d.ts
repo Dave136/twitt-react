@@ -1,5 +1,6 @@
 interface User {
   _id: string;
+  id?: string;
   biography: string;
   birthday: string;
   email: string;
@@ -7,6 +8,8 @@ interface User {
   location: string;
   name: string;
   website: string;
+  banner?: string;
+  avatar?: string;
 }
 
 interface JwtDecode extends User {
