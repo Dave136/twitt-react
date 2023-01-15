@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,9 +11,12 @@ import {
 import { useAuth } from '~/context/auth-context';
 import { removeToken } from '~/utils';
 import TwittLogo from '~/assets/logo-white.png';
+import BasicModal from './basic-modal';
+import TweetForm from './tweet-form';
 
 export default function AsideMenu() {
   const { user, setRefreshLogin } = useAuth();
+  const closeRef = useRef<HTMLAnchorElement | null>(null);
 
   const logout = () => {
     removeToken();
@@ -51,9 +55,12 @@ export default function AsideMenu() {
           <FontAwesomeIcon className="mr-6" icon={faPowerOff} /> Logout
         </NavLink>
       </nav>
-      <button className="btn btn-info rounded-full mt-8">
+      <a href="#create-tweet" className="btn btn-info rounded-full mt-8">
         <FontAwesomeIcon className="mr-2" icon={faEdit} /> Create
-      </button>
+      </a>
+      <BasicModal id="create-tweet" closeRef={closeRef}>
+        <TweetForm onClose={() => closeRef.current?.click()} />
+      </BasicModal>
     </aside>
   );
 }

@@ -12,6 +12,13 @@ interface User {
   avatar?: string;
 }
 
+interface Tweet {
+  _id: string;
+  userId: string;
+  message: string;
+  date: string;
+}
+
 interface JwtDecode extends User {
   exp: number;
 }

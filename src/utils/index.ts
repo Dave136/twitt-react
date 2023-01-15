@@ -11,3 +11,9 @@ export const getToken = () => {
 export const removeToken = () => {
   localStorage.removeItem(TOKEN_KEY);
 };
+
+export const injectLink = (text: string) => {
+  const linkRegex =
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+  return text?.replace(linkRegex, "<a href='$1' target='_blank'>$1</a>");
+};
