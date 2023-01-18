@@ -6,11 +6,7 @@ type GetTweets = (id: string, page: number) => Promise<Tweet[]>;
 
 export const createTweet: CreateTweet = async (body) => {
   try {
-    await axios.post('/tweet', body, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    await axios.post('/tweet', body);
   } catch (error: any) {
     throw error.response;
   }
@@ -19,11 +15,7 @@ export const createTweet: CreateTweet = async (body) => {
 export const getTweets: GetTweets = async (id, page) => {
   try {
     const url = `/tweet?id=${id}&page=${page}`;
-    const { data } = await axios.get<Tweet[]>(url, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    const { data } = await axios.get<Tweet[]>(url);
 
     return data;
   } catch (error: any) {

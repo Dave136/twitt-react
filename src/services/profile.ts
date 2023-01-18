@@ -8,11 +8,7 @@ type UpdateProfile = (user: Partial<User>) => Promise<void>;
 
 export const getProfile: GetProfile = async (id) => {
   try {
-    const { data } = await axios.get(`/profile?id=${id}`, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    const { data } = await axios.get(`/profile?id=${id}`);
     return data;
   } catch (error: any) {
     throw error.response;
@@ -26,7 +22,6 @@ export const uploadBanner: UploadBanner = async (file: File) => {
     await axios.post('/banner', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${getToken()}`,
       },
       onUploadProgress(event) {
         const percentage = Math.round(
@@ -47,11 +42,12 @@ export const uploadAvatar: UploadAvatar = async (file: File) => {
     await axios.post('/avatar', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${getToken()}`,
       },
       onUploadProgress: (event) => {
+        if (!event) return;
+
         const percentage = Math.round(
-          ((100 * event.loaded) / event?.total) as number
+          ((100 * event.loaded) / event?.total ?? 0) as number
         );
         console.log('uploading percentage:', percentage);
       },
@@ -63,11 +59,7 @@ export const uploadAvatar: UploadAvatar = async (file: File) => {
 
 export const updateProfile: UpdateProfile = async (user) => {
   try {
-    await axios.put(`/profile`, user, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    await axios.put(`/profile`, user);
   } catch (error: any) {
     throw error.response;
   }
