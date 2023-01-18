@@ -37,7 +37,6 @@ export default function Profile() {
       setTweets(data);
     } catch (error) {
       console.error(error);
-      // toast.error('Tweets not found');
     }
   };
 

@@ -1,9 +1,8 @@
-import { getToken } from '~/utils';
 import axios from '../config/axios';
 
 type FollowParams = {
   page: number;
-  type: 'follow' | 'news';
+  type: UserType;
   search: string;
 };
 

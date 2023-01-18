@@ -36,7 +36,7 @@ export default function AsideMenu() {
           <FontAwesomeIcon className="mr-6" icon={faHome} /> Home
         </NavLink>
         <NavLink
-          to="/users"
+          to="/profiles"
           className="text-xl font-bold mb-8 transition ease hover:text-info"
         >
           <FontAwesomeIcon className="mr-6" icon={faUsers} /> Users

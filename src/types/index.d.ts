@@ -22,3 +22,5 @@ interface Tweet {
 interface JwtDecode extends User {
   exp: number;
 }
+
+type UserType = 'new' | 'follow';
