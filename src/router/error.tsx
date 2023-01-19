@@ -1,15 +1,19 @@
-import { useRouteError } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import TwittLogo from '~/assets/logo.png';
 
 export default function Error() {
-  const error = useRouteError();
+  const navigate = useNavigate();
+
+  const goToHome = () => navigate('/');
 
   return (
-    <div id="error-page">
+    <div className="flex flex-col justify-center items-center mt-16">
+      <img className="w-72" src={TwittLogo} alt="Twitt Logo" />
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
+      <button className="btn btn-outline btn-info mt-4" onClick={goToHome}>
+        refresh
+      </button>
     </div>
   );
 }
