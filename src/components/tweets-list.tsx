@@ -5,6 +5,8 @@ import { API_URL } from '~/constant';
 import { injectLink } from '~/utils';
 
 const formatDate = (date: string) => {
+  if (!date) return '';
+
   const calendar = new Intl.RelativeTimeFormat('en-US', {
     localeMatcher: 'lookup',
     numeric: 'auto',
@@ -69,8 +71,8 @@ function Tweet({ tweet }: { tweet: Tweet }) {
 export default function TweetsList({ tweets }: { tweets: Tweet[] }) {
   return (
     <div>
-      {tweets.map((tweet) => (
-        <Tweet tweet={tweet} key={tweet._id} />
+      {tweets.map((tweet, index) => (
+        <Tweet tweet={tweet} key={index} />
       ))}
     </div>
   );

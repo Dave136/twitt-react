@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getProfile } from '~/services/profile';
 import AvatarNotFound from '~/assets/avatar-not-found.png';
 import { API_URL } from '~/constant';
@@ -6,6 +7,7 @@ import { API_URL } from '~/constant';
 export default function Profile({ user }: { user: User }) {
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const getAllUserInfo = async () => {
     try {
@@ -26,7 +28,10 @@ export default function Profile({ user }: { user: User }) {
   }, []);
 
   return (
-    <div className="flex px-5 py-3 border-b border-b-gray-700 transition ease hover:bg-gray-700 hover:cursor-pointer">
+    <div
+      className="flex px-5 py-3 border-b border-b-gray-700 transition ease hover:bg-gray-700 hover:cursor-pointer"
+      onClick={() => navigate(`/profile/${userInfo?.id}`)}
+    >
       <div className="avatar">
         <div className="w-12 rounded-full">
           <img src={avatarUrl as string} />

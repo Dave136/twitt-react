@@ -19,6 +19,17 @@ interface Tweet {
   date: string;
 }
 
+interface TweetFollowing {
+  _id: string;
+  userId: string;
+  userRelationId: string;
+  tweet: {
+    _id: string;
+    message: string;
+    date: string;
+  };
+}
+
 interface JwtDecode extends User {
   exp: number;
 }
